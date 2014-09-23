@@ -17,7 +17,7 @@ LoLReplayAPI.prototype.request = function(url, callback) {
 
   request(options, function(error, res, body) {
     if (error) {
-      callback({'httpStatus':res.headers.statusCode,'errorCode':'GENERIC_ERROR',message':error});
+      callback({'httpStatus':res.headers.statusCode,'errorCode':'GENERIC_ERROR','message':error});
     } else {
       callback(JSON.parse(body));
     }
