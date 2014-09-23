@@ -17,27 +17,21 @@ LoLReplayAPI.prototype.request = function(url, callback) {
 
   request(options, function(error, res, body) {
     if (error) {
-      callback({'status':'error','error':error+' when connecting to op.gg-api server'});
-      return;
+      callback({'status':'error','error':error});
     } else {
-      var json = JSON.parse(body);
-      if (typeof json.status === 'undefined') {
-        callback({'status':'error','error':'return was not json, wtf'});
-        return;
-      }
-      callback(json);
+      callback(JSON.parse(body));
     }
   });
 }
 
 /* Public Methods */
 LoLReplayAPI.prototype.Game = function(region, gameid, callback){
-  var url = 'http://'+this.opts.host+'/v1/stats/game/'+region+'/'+gameid;
+  var url = 'https://'+this.opts.host+'/v1/stats/game/'+region.toUpperCase()+'/'+gameid;
   this.request(url,callback);
 }
 
-opggClient.prototype.Timeline = function(region, gameid, callback){
-  var url = 'http://'+this.opts.host+'/v1/stats/game/'+region+'/'+gameid+'/timeline';
+LoLReplayAPI.prototype.Timeline = function(region, gameid, callback){
+  var url = 'https://'+this.opts.host+'/v1/stats/game/'+region.toUpperCase()+'/'+gameid+'/timeline';
   this.request(url,callback);
 }
 /* End Public Methods */
